@@ -8,7 +8,7 @@ var container = services.BuildServiceProvider();
 
 var service1 = container.GetService<IService>();
 
-service1.Show();
+service1.Show();    
 
     
 public interface IService
@@ -27,13 +27,10 @@ public class Service : IService
         Console.WriteLine(_message.Text);
     }
 }
-
-
 public interface IMessage
 {
     public string Text { get; set; }
 }
-
 public class Message : IMessage
 {
     public string Text { get; set; }
@@ -44,13 +41,3 @@ public class Message : IMessage
     }
 }
 
-
-//var services = new ServiceCollection();
-
-//services.AddScoped<IMessage, Message>();
-//services.AddScoped<IEmailService, EmailService>();
-
-
-//var container = services.BuildServiceProvider();
-
-//var email = container.GetRequiredService<IEnumerable<IEmailService>>();

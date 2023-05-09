@@ -1,12 +1,10 @@
-﻿public class Container
+﻿public class Container : IContainer
 {
     private readonly List<ServiceDescriptor> _serviceDescriptors;
-
     public Container(List<ServiceDescriptor> serviceDescriptors)
     {
        _serviceDescriptors = serviceDescriptors;
     }
-
     public object GetService (Type serviceType)
     {
         var descriptor = _serviceDescriptors.SingleOrDefault(i => i.ServiceType == serviceType);
@@ -38,7 +36,6 @@
 
         return default!;
     }
-
     public T GetService<T>()
     {
         return (T)GetService(typeof(T));
