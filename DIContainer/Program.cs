@@ -1,20 +1,47 @@
 ﻿
-
-
 var services = new ServiceCollection();
 
-services.RegisterSingleton<Service>();
+services.AddSingleton<IMessage, Message>();
+services.AddTransient<IService, Service>();
 
+var container = services.BuildServiceProvider();
 
+var service1 = container.GetService<IService>();
 
-var container = new Container();
+service1.Show();
 
-var service = container.GetService<Service>();
-
-
-public class Service
+    
+public interface IService
+{ 
+    void Show();
+}
+public class Service : IService
 {
+    private readonly IMessage _message;
+    public Service(IMessage message)
+    {
+        _message = message;
+    }
+    public void Show()
+    {
+        Console.WriteLine(_message.Text);
+    }
+}
 
+
+public interface IMessage
+{
+    public string Text { get; set; }
+}
+
+public class Message : IMessage
+{
+    public string Text { get; set; }
+
+    public Message()
+    {
+        Text = "Root";
+    }
 }
 
 
